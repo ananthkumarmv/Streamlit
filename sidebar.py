@@ -14,4 +14,3 @@ selectbox = st.sidebar.selectbox(
 )
 
 st.write(f"You selected {selectbox}")
-
