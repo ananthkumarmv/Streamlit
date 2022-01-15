@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Jan 12 17:46:37 2022
+Created on Sat Jan 15 21:00:43 2022
 
 @author: Unbeknownstguy
 """
 
+
 import streamlit as st
-
-
-# Displaying images
-
-# importing image from pillow to open images
 from PIL import Image
-img = Image.open("Images/Eq.jpg")
 
-# displaying image using streamlit
-st.image(img, width=200)
+image = Image.open('picture.jpg')
+st.image(image, caption = 'This is a picture', use_column_width = True)
+
