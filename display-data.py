@@ -14,6 +14,6 @@ st.write('This is a table')
 dataframe = pd.DataFrame(np.random.randn(10, 20),
             columns = ('col %d' % i
                        for i in range(20)))
-
-st.write(dataframe)
-
+# we can use "dataframe" directly instead of using
+# st.write(dataframe). This is called as magical command
+st.write(dataframe) 
