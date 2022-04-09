@@ -10,7 +10,7 @@ import streamlit as st
 
 st.title("Streamlit!")
 
-st.write("Our first DAtaFrame")
+st.write("Our first DataFrame")
 
 st.write(
     pd.DataFrame({
