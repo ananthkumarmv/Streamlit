@@ -11,6 +11,25 @@ dataset = st.container()
 features = st.container()
 model_training = st.container()
 
+st.markdown(
+    """
+    <style>
+    .main{
+    background-color: #E9897E
+    }
+    </style>
+    """,
+    unsafe_allow_html = True
+)
+
+
+# this function runs only once
+@st.cache
+def get_data(filename):
+    taxi_data = pd.read_csv(filename)
+
+    return taxi_data
+
 
 with header:
     st.title('Welcome to my awesome data science project!')
@@ -21,7 +40,7 @@ with dataset:
     st.header('NYC taxi dataset')
     st.text("I found this dataset on blablabla.com, ....")
 
-    taxi_data = pd.read_csv(r"C:\Users\Unbeknownstguy\Documents\GitHub\Streamlit\taxi_data.csv")
+    taxi_data = get_data(r"C:\Users\Unbeknownstguy\Documents\GitHub\Streamlit\taxi_data.csv")
     st.write(taxi_data.head())
 
     st.subheader('Pick-up location ID distribution on the NYC dataset')
@@ -49,9 +68,16 @@ with model_training:
 
     n_estimator = sel_col.selectbox('How many trees should there be?', options=[100, 200, 300, 'No limit'], index = 0)
 
+    sel_col.text('Here is a list of features in my data:')
+    sel_col.write(taxi_data.columns)
+
     input_feature = sel_col.text_input('Which feature should be used as the input feature?','PULocationID')
 
-    regr = RandomForestRegressor(max_depth = max_depth, n_estimators = n_estimator)
+    if n_estimator == 'No limit':
+        regr = RandomForestRegressor(max_depth=max_depth)
+
+    else:
+        regr = RandomForestRegressor(max_depth = max_depth, n_estimators = n_estimator)
 
     x = taxi_data[[input_feature]]
     y = taxi_data[['trip_distance']]
